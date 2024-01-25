@@ -78,7 +78,9 @@ const RobotUI = () => {
     useEffect(() => {
         setSearchTerm(voiceSearchTerm);
     }, [voiceSearchTerm]);
-
+    useEffect(()=>{
+        setInputText(transcript)
+    }, [listening])
 
     const onClickHandlerMic = () => SpeechRecognition.startListening;
     if (!browserSupportsSpeechRecognition) {

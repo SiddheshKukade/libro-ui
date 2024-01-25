@@ -35,7 +35,7 @@ export default function Keyboard({
 		setInputText(newContent); 
 	}; 
 	const handleEnterKey = () => { 
-		window.scrollTo(0, -1000)
+		window.scrollTo(0, -800)
 		// const newContent = inputText + '\n'; 
 		// setInputText(newContent); 
 	}; 
@@ -133,7 +133,7 @@ export default function Keyboard({
 		  className="textcontainer"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          onClick={()=> window.scrollTo(0, 1000)}
+          onClick={()=> window.scrollTo(0, 800)}
 		
           placeholder="Ask me a question..."
         />
