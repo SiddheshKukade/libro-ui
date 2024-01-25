@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+//TODO: to local speech recognition without internet
 import SpeechRecognition, {
     useSpeechRecognition,
 } from "react-speech-recognition";
@@ -7,6 +7,7 @@ import Dictaphone from "../../Dictaphone";
 import "./RobotUI.css";
 import { FaMicrophone } from "react-icons/fa";
 import Keyboard from "../Keyboard/Keyboard";
+import Header from "../Header/Header";
 const RobotUI = () => {
     const [searchTerm, setSearchTerm] = useState("");
 	const [inputText, setInputText] = useState(''); 
@@ -24,47 +25,6 @@ const RobotUI = () => {
     const handleKeyboardButtonClick = (key) => {
         setSearchTerm(searchTerm + key);
     };
-
-    const keyboardKeys = [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "Q",
-        "W",
-        "E",
-        "R",
-        "T",
-        "Y",
-        "U",
-        "I",
-        "O",
-        "P",
-        "A",
-        "S",
-        "D",
-        "F",
-        "G",
-        "H",
-        "J",
-        "K",
-        "L",
-        "Z",
-        "X",
-        "C",
-        "V",
-        "B",
-        "N",
-        "M",
-        "<",
-        ">",
-    ];
     const {
         transcript,
         listening,
@@ -89,9 +49,7 @@ const RobotUI = () => {
     return (
         <div className="robot-screen">
             {/* <Dictaphone /> */}
-
-            <h1 className="header2"> Libro: The Library Assistant </h1>
-            <br />
+<Header/>
             {listening ? (
                 <p className="pgreen">Currently Speaking: {transcript}</p>
             ) : (
@@ -118,19 +76,10 @@ const RobotUI = () => {
                 </button>
             </div>
             <div className="search-bar">
-                {/* <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onClick={handleSearchClick}
-          placeholder="Ask me a question..."
-        /> */}
-
                 <FaMicrophone
                     onClick={SpeechRecognition.startListening}
                     className="voice-icon"
                 />
-
                 <button
                     className="btngood"
                     onClick={() => {
@@ -149,22 +98,6 @@ const RobotUI = () => {
                 </button>
             </div>
             <Keyboard searchTerm={searchTerm} setSearchTerm={setSearchTerm} handleSearchClick={handleSearchClick}  setInputText={setInputText} inputText={inputText} />
-            {/* {isKeyboardVisible && (
-      
-          {keyboardKeys.map((key) => (
-            <button
-              className="keyboard-button"
-              key={key}
-              onClick={() => handleKeyboardButtonClick(key)}
-            >
-              {key}
-            </button>
-          ))}
-        </div>
-      )} */}
-            {/* <div className="keyboard"> */}
-
-            {/* </div> */}
         </div>
     );
 };
