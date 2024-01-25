@@ -1,9 +1,19 @@
 /* keyboard.css */
+
+@keyframes scrollAnimation {
+	from {
+	  opacity: 0;
+	}
+	to {
+	  opacity: 1;
+	}
+  }
 .keyboard { 
 	display: flex; 
 	height: 100vh; 
 	flex-direction: column; 
-	justify-content: center; 
+	/* transition: all ; */
+	justify-content: flex-start; 
 	align-items: center; 
 } 
 

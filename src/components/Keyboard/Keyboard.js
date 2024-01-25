@@ -1,9 +1,11 @@
 // keyboard.js 
 import React, { useState } from 'react'; 
 import './Keyboard.css'; 
-
-export default function Keyboard() { 
-	const [inputText, setInputText] = useState(''); 
+import { computeHeadingLevel } from '@testing-library/react';
+import { FaDeleteLeft  } from "react-icons/fa6";
+export default function Keyboard({
+	setInput, searchTerm, handleSearchClick, inputText, setInputText
+}) { 
 	const [isCaps, setIsCaps] = useState(false); 
 	const [isShift, setIsShift] = useState(false); 
 
@@ -17,7 +19,7 @@ export default function Keyboard() {
 			handleSpaceKey(); 
 		} else if (key === 'Caps Lock') { 
 			handleCapsLock(); 
-		} else if (key === '<i className="fa-solid fa-delete-left"></i>') { 
+		} else if (key === 'Clear') { 
 			handleDeleteKey(); 
 		} else if (key === 'Shift') { 
 			handleShiftKey(); 
@@ -27,13 +29,15 @@ export default function Keyboard() {
 			handleRegularKey(key); 
 		} 
 	}; 
+	console.log("input" , inputText)
 	const handleSpaceKey = () => { 
 		const newContent = inputText + '\u00A0'; 
 		setInputText(newContent); 
 	}; 
 	const handleEnterKey = () => { 
-		const newContent = inputText + '\n'; 
-		setInputText(newContent); 
+		window.scrollTo(0, -1000)
+		// const newContent = inputText + '\n'; 
+		// setInputText(newContent); 
 	}; 
 	const handleCapsLock = () => { 
 		const updatedCaps = !isCaps; 
@@ -118,18 +122,32 @@ export default function Keyboard() {
 
 	return ( 
 		<div className='keyboard'> 
-			<div className="textcontainer"> 
+			{/* <div className="textcontainer"> 
 				<pre>{inputText}</pre> 
-			</div> 
+				
+			</div>  */}
+			 <input
+			 height={"100px"}
+			 width={"50px"}
+          type="textarea"
+		  className="textcontainer"
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          onClick={()=> window.scrollTo(0, 1000)}
+		
+          placeholder="Ask me a question..."
+        />
 			<div className="keyboardcontainer"> 
 				<div className="container"> 
 					<div className="row"> 
 						{['~.`', '!.1', '@.2', '#.3', '$.4', '%.5', 
 						'^.6', '&.7', '*.8', '(.9', ').0', '_.-', '+.=', 
-						'<i className="fa-solid fa-delete-left"></i>'] 
+						'Clear'] 
 						.map((keyvalue) => 
 						( 
-							<div key={keyvalue} className='key'
+							<div key={keyvalue}
+
+							 className='key'
 								onClick={() => handleKeyClick(keyvalue)}> 
 								{keyvalue.includes('.') ? ( 
 									keyvalue.split('.').map((part, index) => ( 
@@ -137,13 +155,14 @@ export default function Keyboard() {
 									)) 
 								) : ( 
 									keyvalue === 
-									'<i className="fa-solid fa-delete-left"></i>'
+									'Clear'
 									? ( 
-										<i className="fa-solid fa-delete-left"></i> 
+										<FaDeleteLeft/> 
 									) : ( 
 										<span>{keyvalue}</span> 
 									) 
-								)} 
+								)}
+								 
 							</div> 
 						))} 
 					</div> 
